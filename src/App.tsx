@@ -11,7 +11,9 @@ import NewComplaint from "./pages/NewComplaint";
 import ComplaintDetail from "./pages/ComplaintDetail";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
+import Messenger from "./pages/Messenger";
 import NotFound from "./pages/NotFound";
+import { AIAssistant } from "./components/AIAssistant";
 
 const queryClient = new QueryClient();
 
@@ -30,9 +32,11 @@ const App = () => (
             <Route path="/complaints/:id" element={<ComplaintDetail />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/messenger" element={<Messenger />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <AIAssistant />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

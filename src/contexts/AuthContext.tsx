@@ -69,23 +69,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       options: {
         data: {
           full_name: fullName,
+          role: role, // Pass role in metadata so trigger can use it
         },
         emailRedirectTo: `${window.location.origin}/`
       }
     });
-
-    if (!error) {
-      // Update the user role if different from default
-      if (role !== 'student') {
-        const { data: sessionData } = await supabase.auth.getSession();
-        if (sessionData.session?.user) {
-          await supabase
-            .from('user_roles')
-            .update({ role })
-            .eq('user_id', sessionData.session.user.id);
-        }
-      }
-    }
 
     return { error };
   };
