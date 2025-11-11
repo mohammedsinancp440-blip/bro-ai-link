@@ -117,3 +117,28 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom utility classes for enhanced UI */
+.bg-gradient-hero {
+  background: var(--gradient-hero);
+}
+
+.bg-gradient-text {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-hover {
+  box-shadow: var(--shadow-hover);
+  transition: var(--transition-smooth);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 25px hsl(var(--primary-glow) / 0.4);
+}
+
+.shadow-elegant {
+  box-shadow: 0 10px 40px -10px hsl(var(--foreground) / 0.15);
+}

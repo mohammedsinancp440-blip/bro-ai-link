@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { MessageSquare, Bell, User, LogOut } from 'lucide-react';
+import { MessageSquare, Bell, User, LogOut, MessagesSquare } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,6 +26,12 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           {user ? (
             <>
+              <Button variant="ghost" size="icon" asChild>
+                <Link to="/messenger">
+                  <MessagesSquare className="w-5 h-5" />
+                </Link>
+              </Button>
+
               <Button variant="ghost" size="icon" asChild>
                 <Link to="/notifications">
                   <Bell className="w-5 h-5" />
