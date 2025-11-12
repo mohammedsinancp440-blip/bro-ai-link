@@ -6,12 +6,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
+import AdminAuth from "./pages/AdminAuth";
 import Dashboard from "./pages/Dashboard";
 import NewComplaint from "./pages/NewComplaint";
 import ComplaintDetail from "./pages/ComplaintDetail";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
-import Messenger from "./pages/Messenger";
+import GroupChat from "./pages/GroupChat";
 import NotFound from "./pages/NotFound";
 import { AIAssistant } from "./components/AIAssistant";
 
@@ -27,12 +28,13 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/admin" element={<AdminAuth />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/complaints/new" element={<NewComplaint />} />
             <Route path="/complaints/:id" element={<ComplaintDetail />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/notifications" element={<Notifications />} />
-            <Route path="/messenger" element={<Messenger />} />
+            <Route path="/messenger" element={<GroupChat />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -29,6 +29,7 @@ const Navbar = () => {
               <Button variant="ghost" size="icon" asChild>
                 <Link to="/messenger">
                   <MessagesSquare className="w-5 h-5" />
+                  <span className="sr-only">Group Chat</span>
                 </Link>
               </Button>
 

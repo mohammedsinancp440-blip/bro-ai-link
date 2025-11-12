@@ -58,15 +58,17 @@ const Landing = () => {
             <Button asChild size="lg" className="bg-gradient-primary">
               <Link to="/auth">Get Started</Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link to="/auth">Learn More</Link>
+            <Button asChild size="lg" variant="outline" onClick={() => {
+              document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
+              <span>Learn More</span>
             </Button>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section id="features" className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Powerful Features</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
