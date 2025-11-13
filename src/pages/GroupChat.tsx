@@ -8,6 +8,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Send, Users } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useToast } from '@/hooks/use-toast';
+import { messageSchema } from '@/lib/validations';
 
 interface GroupMessage {
   id: string;
@@ -75,19 +76,26 @@ const GroupChat = () => {
   const sendMessage = async () => {
     if (!newMessage.trim() || !user) return;
 
-    const { error } = await supabase.from('group_messages').insert({
-      user_id: user.id,
-      content: newMessage.trim(),
-    });
+    try {
+      // Validate message
+      const validatedData = messageSchema.parse({
+        content: newMessage.trim()
+      });
 
-    if (error) {
+      const { error } = await supabase.from('group_messages').insert({
+        user_id: user.id,
+        content: validatedData.content,
+      });
+
+      if (error) throw error;
+      
+      setNewMessage('');
+    } catch (error: any) {
       toast({
         title: 'Error',
-        description: 'Failed to send message',
+        description: error.message || 'Failed to send message',
         variant: 'destructive',
       });
-    } else {
-      setNewMessage('');
     }
   };
 

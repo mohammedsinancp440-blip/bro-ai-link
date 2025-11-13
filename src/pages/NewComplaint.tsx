@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
+import { complaintSchema } from '@/lib/validations';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -36,6 +37,15 @@ const NewComplaint = () => {
     setSubmitting(true);
 
     try {
+      // Validate input
+      const validatedData = complaintSchema.parse({
+        title,
+        description,
+        category,
+        priority,
+        is_anonymous: isAnonymous,
+      });
+
       // Generate complaint ID
       const { data: complaintIdData, error: idError } = await supabase
         .rpc('generate_complaint_id');
@@ -45,11 +55,7 @@ const NewComplaint = () => {
       const { error } = await supabase.from('complaints').insert({
         complaint_id: complaintIdData,
         student_id: user?.id,
-        title,
-        description,
-        category,
-        priority,
-        is_anonymous: isAnonymous,
+        ...validatedData,
         status: 'new',
       });
 

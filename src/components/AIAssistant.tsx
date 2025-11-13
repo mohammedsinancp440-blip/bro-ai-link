@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Bot, Send, X, Minimize2, Maximize2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
+import { messageSchema } from '@/lib/validations';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -25,6 +26,19 @@ export const AIAssistant = () => {
     if (!input.trim() || isLoading) return;
 
     const userMessage = input.trim();
+    
+    try {
+      // Validate message
+      messageSchema.parse({ content: userMessage });
+    } catch (error) {
+      toast({
+        title: 'Validation Error',
+        description: 'Message is too long or invalid',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setInput('');
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);

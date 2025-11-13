@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/lib/supabase';
+import { profileUpdateSchema } from '@/lib/validations';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -75,13 +76,16 @@ const Profile = () => {
     setUpdating(true);
 
     try {
+      // Validate input
+      const validatedData = profileUpdateSchema.parse({
+        full_name: fullName,
+        batch,
+        department,
+      });
+
       const { error } = await supabase
         .from('profiles')
-        .update({
-          full_name: fullName,
-          batch,
-          department,
-        })
+        .update(validatedData)
         .eq('id', user?.id);
 
       if (error) throw error;
