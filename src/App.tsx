@@ -13,6 +13,7 @@ import ComplaintDetail from "./pages/ComplaintDetail";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
 import GroupChat from "./pages/GroupChat";
+import Polls from "./pages/Polls";
 import NotFound from "./pages/NotFound";
 import { AIAssistant } from "./components/AIAssistant";
 
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/profile" element={<Profile />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/messenger" element={<GroupChat />} />
+            <Route path="/polls" element={<Polls />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
