@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { MessageSquare, Bell, User, LogOut, MessagesSquare } from 'lucide-react';
+import { MessageSquare, Bell, User, LogOut, MessagesSquare, BarChart3 } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,6 +30,13 @@ const Navbar = () => {
                 <Link to="/messenger">
                   <MessagesSquare className="w-5 h-5" />
                   <span className="sr-only">Group Chat</span>
+                </Link>
+              </Button>
+
+              <Button variant="ghost" size="icon" asChild>
+                <Link to="/polls">
+                  <BarChart3 className="w-5 h-5" />
+                  <span className="sr-only">Polls</span>
                 </Link>
               </Button>
 
